@@ -2,13 +2,15 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"log"
 	"net/http"
 	"os"
+	"encoding/json"
+ 	"fmt"
+ 	"io/ioutil"
 )
 
-var API_CALL="brownfield-api"
+var API_CALL="sample-api"
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	
@@ -16,15 +18,45 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	
 	fmt.Fprintf(w, "<H1>Welcome to app-name function</H1>")
 		    
-	fmt.Fprintf(w, "<H2>Brownfield API: ")
-	fmt.Fprintf(w, API_CALL)
-	fmt.Fprintf(w, "</H2>")
+	executeAPI (API_CALL)
 	
 	fmt.Fprintf(w, "<H3>Function revision: ")
 	fmt.Fprintf(w, os.Getenv("REV"))
 	fmt.Fprintf(w, "</H3>")
 }
 
+func executeAPI (string apiCall) {
+	
+	log.Println("Calling API: ", apiCall)
+	
+	client := &http.Client{}
+ 	
+	req, err := http.NewRequest("GET", apiCall, nil)
+ 	
+	if err != nil {
+  		log.Println(err.Error())
+ 	}
+	
+ 	req.Header.Add("Accept", "application/json")
+ 	req.Header.Add("Content-Type", "application/json")
+ 	resp, err := client.Do(req)
+ 	
+	if err != nil {
+  		log.Println(err.Error())
+ 	}
+	
+	defer resp.Body.Close()
+ 	bodyBytes, err := ioutil.ReadAll(resp.Body)
+ 	
+	if err != nil {
+  		log.println(err.Error())
+ 	}
+
+	var responseObject Response
+ 	json.Unmarshal(bodyBytes, &responseObject)
+ 	log.Println("API Response as struct %+v\n", responseObject)
+}
+	
 func main() {
 	
 	http.HandleFunc("/", handler)
