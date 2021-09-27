@@ -48,7 +48,6 @@ accelerator:
   - name: sampleAPI
     label: Sample API
     inputType: text
-    display: true
     dataType: string
     defaultValue: https://brownfieldapi.tanzu.dekt.io/my-sample-api
   
