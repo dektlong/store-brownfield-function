@@ -1,6 +1,6 @@
 accelerator:
   displayName: Brownfield Function for Online Stores
-  description: Accelerator to create a simple Function executing Brownfield APIs for 3rd party services used by online store
+  description: Accelerator to create a simple Function executing Brownfield APIs
   iconUrl: https://raw.githubusercontent.com/dektlong/dekt-images/80bfdbf23040731d16310e286e7d40b57e3b23d5/tanzu.png
   tags:
   - onlinestore-dev
@@ -30,7 +30,7 @@ accelerator:
     choices:
       - value: k8s
         text: K8s simple
-      - value: workload
+      - value: tap
         text: TAP workload
       - value: cnr
         text: Cloud Native Runtime (kNative)
@@ -71,8 +71,6 @@ engine:
           substitutions:
             - text: app-name
               with: "#artifactId"
-            - text: brownfield-api
-              with: "#brownfieldAPI"
     #java-native framework
     - includes: [ "java-native/**" ]
       condition: "#functionFramework == 'spring'"
@@ -81,7 +79,7 @@ engine:
           substitutions:
             - text: app-name
               with: "#artifactId"
-    - includes: [ "accelerators/deployment/app-knative.yaml"]
+    - includes: [ "deployment/app-knative.yaml"]
       condition: "#appDeploymentType == 'cnr'"
       chain:
         - type: ReplaceText
@@ -90,3 +88,17 @@ engine:
               with: "#artifactId"
             - text: scale-to-zero-value
               with: "#scaleToZero"
+    - includes: [ "deployment/workload.yaml"]
+      condition: "#appDeploymentType == 'tap'"
+      chain:
+        - type: ReplaceText
+          substitutions:
+            - text: app-name
+              with: "#artifactId"
+    - includes: [ "deployment/workload.yaml"]
+      condition: "#appDeploymentType == 'tap'"
+      chain:
+        - type: ReplaceText
+          substitutions:
+            - text: app-name
+              with: "#artifactId"
