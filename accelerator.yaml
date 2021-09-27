@@ -57,30 +57,30 @@ accelerator:
 engine:
   merge:
     #generic transformations
-    - includes: ["**"]
-      excludes: [ "accelerators/**" ]
+    - includes: ["README.MD"]
       chain:
         - type: ReplaceText
           substitutions:
             - text: app-name
               with: "#artifactId"
-    #deployment transformation
-    - includes: [ "accelerators/deployment/app-simple.yaml" ]
-      condition: "#appDeploymentType == 'k8s'"
+    #go framework
+    - includes: [ "go/**" ]
+      condition: "#functionFramework == 'go'"
       chain:
         - type: ReplaceText
           substitutions:
             - text: app-name
               with: "#artifactId"
-    - includes: [ "accelerators/deployment/workload.yaml" ]
-      condition: "#appDeploymentType == 'workload'"
+            - text: brownfield-api
+              with: "#brownfieldAPI"
+    #java-native framework
+    - includes: [ "java-native/**" ]
+      condition: "#functionFramework == 'spring'"
       chain:
         - type: ReplaceText
           substitutions:
             - text: app-name
               with: "#artifactId"
-            - text: git-repo
-              with: "#gitRepo"
     - includes: [ "accelerators/deployment/app-knative.yaml"]
       condition: "#appDeploymentType == 'cnr'"
       chain:
