@@ -1,0 +1,140 @@
+accelerator:
+  displayName: Frontend UX for Online Stores
+  description: Accelerator to create fronted UX for online Stores
+  iconUrl: https://raw.githubusercontent.com/dektlong/dekt-images/main/reactjs-logo.png
+  tags:
+  - onlinestore-dev
+
+  options:
+  
+  #app deployment
+  - name: appDeploymentType
+    label: App deployment config
+    description: Type of deployment configurations
+    required: true
+    defaultValue: k8s
+    inputType: select
+    choices:
+      - value: k8s
+        text: K8s simple
+      - value: workload
+        text: TAP workload
+      - value: cnr
+        text: Cloud Native Runtime (kNative)
+      - value: cf
+        text: Cloud Foundry manifest
+  - name: gitRepo
+    label: Git repo
+    inputType: text
+    required: true
+    dataType: string
+    defaultValue: https://github.com/dektlong/dekt4pets-frontend
+  
+  - name: scaleToZero
+    label: Scale to zero
+    description: Enable function to scale to zero
+    inputType: toggle
+    dataType: boolean
+    dependsOn:
+      name: appDeploymentType
+      value: cnr
+    defaultValue: false
+    
+  #apis
+  - name: firstApiGroup
+    label: First level API group
+    description: Name of the first level API group
+    defaultValue: apiGroup1
+    required: true
+  - name: secondApiGroup
+    label: Second level API group
+    description: Name of the second API group
+    defaultValue: apiGroup2
+    display: true
+  - name: thirdApiGroup
+    label: Third  level API group
+    description: Name of the third API group
+    defaultValue: apiGroup3
+  - name: forthApiGroup
+    label: Forth level API group
+    description: Name of the forth API group
+    defaultValue: apiGroup4
+  - name: fifthApiGroup
+    label: Fifth level API group
+    description: Name of the Fifth API group
+    defaultValue: apiGroup5
+  
+  - name: apiSamples
+    inputType: checkbox
+    label: API samples
+    description: API developement samples
+    display: true
+    dataType: [string]
+    defaultValue:
+      - k8s
+    choices:
+      - value: k8s  
+        text: routes and gateway definitions for k8s
+      - value: cf
+        text: routes and gateway definitions for Cloud Foundry
+
+
+engine:
+  merge:
+    #generic transformations
+    - includes: ["**"]
+      excludes: [ "accelerators/**" ]
+      chain:
+        - type: ReplaceText
+          substitutions:
+            - text: app-name
+              with: "#artifactId"
+    #deployment transformation
+    - includes: [ "accelerators/deployment/app-simple.yaml" ]
+      condition: "#appDeploymentType == 'k8s'"
+      chain:
+        - type: ReplaceText
+          substitutions:
+            - text: app-name
+              with: "#artifactId"
+    - includes: [ "accelerators/deployment/workload.yaml" ]
+      condition: "#appDeploymentType == 'workload'"
+      chain:
+        - type: ReplaceText
+          substitutions:
+            - text: app-name
+              with: "#artifactId"
+            - text: git-repo
+              with: "#gitRepo"
+    - includes: [ "accelerators/deployment/app-knative.yaml"]
+      condition: "#appDeploymentType == 'cnr'"
+      chain:
+        - type: ReplaceText
+          substitutions:
+            - text: app-name
+              with: "#artifactId"
+            - text: scale-to-zero-value
+              with: "#scaleToZero"
+    #api-grid transformation
+    - includes: [ "accelerators/api-grid/k8s/**" ]
+      condition: "#apiSamples.contains('k8s')"
+      chain:
+        - type: ReplaceText
+          substitutions:
+            - text: app-name
+              with: "#artifactId"
+            - text: api-group1
+              with: "#firstApiGroup"
+            - text: api-group2
+              with: "#secondApiGroup"
+    - includes: [ "accelerators/api-grid/cf/**" ]
+      condition: "#apiSamples.contains('cf')"
+      chain:
+        - type: ReplaceText
+          substitutions:
+            - text: app-name
+              with: "#artifactId"
+            - text: api-group1
+              with: "#firstApiGroup"
+            - text: api-group2
+              with: "#secondApiGroup"
