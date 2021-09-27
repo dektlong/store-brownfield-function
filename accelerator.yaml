@@ -1,11 +1,24 @@
 accelerator:
-  displayName: Frontend UX for Online Stores
-  description: Accelerator to create fronted UX for online Stores
-  iconUrl: https://raw.githubusercontent.com/dektlong/dekt-images/main/reactjs-logo.png
+  displayName: Brownfield Function for Online Stores
+  description: Accelerator to create a simple Function executing Brownfield APIs for 3rd party services used by online store
+  iconUrl: https://raw.githubusercontent.com/dektlong/dekt-images/80bfdbf23040731d16310e286e7d40b57e3b23d5/tanzu.png
   tags:
   - onlinestore-dev
 
   options:
+  
+  #function framework
+  - name: functionFramework
+    label: Function implementation framework
+    description: Function implementation framework
+    required: true
+    defaultValue: go
+    inputType: select
+    choices:
+      - value: go
+        text: GoLang
+      - value: spring
+        text: Spring Native
   
   #app deployment
   - name: appDeploymentType
@@ -23,13 +36,7 @@ accelerator:
         text: Cloud Native Runtime (kNative)
       - value: cf
         text: Cloud Foundry manifest
-  - name: gitRepo
-    label: Git repo
-    inputType: text
-    required: true
-    dataType: string
-    defaultValue: https://github.com/dektlong/dekt4pets-frontend
-  
+        
   - name: scaleToZero
     label: Scale to zero
     description: Enable function to scale to zero
@@ -40,45 +47,13 @@ accelerator:
       value: cnr
     defaultValue: false
     
-  #apis
-  - name: firstApiGroup
-    label: First level API group
-    description: Name of the first level API group
-    defaultValue: apiGroup1
+  - name: gitRepo
+    label: Git repo
+    inputType: text
     required: true
-  - name: secondApiGroup
-    label: Second level API group
-    description: Name of the second API group
-    defaultValue: apiGroup2
-    display: true
-  - name: thirdApiGroup
-    label: Third  level API group
-    description: Name of the third API group
-    defaultValue: apiGroup3
-  - name: forthApiGroup
-    label: Forth level API group
-    description: Name of the forth API group
-    defaultValue: apiGroup4
-  - name: fifthApiGroup
-    label: Fifth level API group
-    description: Name of the Fifth API group
-    defaultValue: apiGroup5
+    dataType: string
+    defaultValue: https://github.com/dektlong/adopter-check
   
-  - name: apiSamples
-    inputType: checkbox
-    label: API samples
-    description: API developement samples
-    display: true
-    dataType: [string]
-    defaultValue:
-      - k8s
-    choices:
-      - value: k8s  
-        text: routes and gateway definitions for k8s
-      - value: cf
-        text: routes and gateway definitions for Cloud Foundry
-
-
 engine:
   merge:
     #generic transformations
@@ -115,26 +90,3 @@ engine:
               with: "#artifactId"
             - text: scale-to-zero-value
               with: "#scaleToZero"
-    #api-grid transformation
-    - includes: [ "accelerators/api-grid/k8s/**" ]
-      condition: "#apiSamples.contains('k8s')"
-      chain:
-        - type: ReplaceText
-          substitutions:
-            - text: app-name
-              with: "#artifactId"
-            - text: api-group1
-              with: "#firstApiGroup"
-            - text: api-group2
-              with: "#secondApiGroup"
-    - includes: [ "accelerators/api-grid/cf/**" ]
-      condition: "#apiSamples.contains('cf')"
-      chain:
-        - type: ReplaceText
-          substitutions:
-            - text: app-name
-              with: "#artifactId"
-            - text: api-group1
-              with: "#firstApiGroup"
-            - text: api-group2
-              with: "#secondApiGroup"
