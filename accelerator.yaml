@@ -42,6 +42,13 @@ accelerator:
     dataType: boolean
     defaultValue: false
     
+  - name: sampleAPI
+    label: Sample API
+    inputType: text
+    required: false
+    dataType: string
+    defaultValue: https://brownfieldapi.tanzu.dekt.io/my-sample-api
+  
   - name: gitRepo
     label: Git repo
     inputType: text
@@ -66,6 +73,8 @@ engine:
           substitutions:
             - text: app-name
               with: "#artifactId"
+            - text: sample-api
+              with: "#sampleAPI"
     #java-native framework
     - includes: [ "java-native/**" ]
       condition: "#functionFramework == 'spring'"
@@ -74,6 +83,8 @@ engine:
           substitutions:
             - text: app-name
               with: "#artifactId"
+            - text: sample-api
+              with: "#sampleAPI"
     - includes: [ "deployment/app-knative.yaml"]
       condition: "#appDeploymentType == 'cnr'"
       chain:
