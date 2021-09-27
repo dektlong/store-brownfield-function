@@ -16,10 +16,9 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	
 	log.Println(r.RemoteAddr, r.Method, r.URL.String())
 	
-	fmt.Fprintf(w, "<H1>Welcome to app-name function</H1>")
+	fmt.Fprintf(w, "Welcome to app-name function")
 		    
-	fmt.Fprintf(w, "API: ", API_CALL)
-	fmt.Fprintf(w, "<BR>Response:<BR>")
+	fmt.Fprintf(w, "Calling API: ",API_CALL)
 	
 	response, err := http.Get(API_CALL)
 
@@ -33,18 +32,15 @@ func handler(w http.ResponseWriter, r *http.Request) {
     	 if err != nil {
 		log.Println(err.Error())
 		fmt.Fprintf(w,"Unable to exectute this API")
-    	} else {
-		fmt.Fprintf(w,string(responseData))
-	}
+    	} 
+	
+	fmt.Fprintf(w,string(responseData))
 	
 	log.Println("Function revision:", os.Getenv("REV"))
 	
 }
 
-func executeAPI (string apiCall) {
-	
-}
-	
+
 func main() {
 	
 	http.HandleFunc("/", handler)
