@@ -7,6 +7,7 @@ spec:
     metadata:
       annotations:
         client.knative.dev/user-image: app-name:latest
+        autoscaling.knative.dev/enable-scale-to-zero: scale-to-zero-value
       name: app-name-v1
     spec:
       containerConcurrency: 10
