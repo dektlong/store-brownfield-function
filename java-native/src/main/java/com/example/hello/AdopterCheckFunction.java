@@ -22,35 +22,22 @@ public class AdopterCheckFunction {
     @Bean
     public Function<String, String> hello() {
         return (in) -> {
+		
+            String API_CALL = "sample-api";
             
             RestTemplate restTemplate = new RestTemplate();
 
-            String output = "\n\n*** Welcome to " + target + " ***\n";
-
-            String adoptionHistoryAPI = "datacheck.tanzu.dekt.io/api/adoption-history?adopterID=" + in;
-
-            String criminalRecordAPI = "datacheck.tanzu.dekt.io/api/criminal-record/" + in;
-
-   		    output = output + "\n\n==> Running adoption history check using API: " + adoptionHistoryAPI + " ...";   
             try
-		    {
-   			    String adoptionHistoryResults = restTemplate.getForObject(adoptionHistoryAPI, String.class);
-                TimeUnit.SECONDS.sleep(2);
-		    }
-		    catch (Exception e) {/*check failure*/}
+	    {
+   		String apiResults = restTemplate.getForObject(API_CALL, String.class);
+	    }
 
-            output = output + "\n\n==> Running criminal record check using API: " + criminalRecordAPI + " ...";   
-            try
-		    {
-                String criminalRecordResults = restTemplate.getForObject(criminalRecordAPI, String.class);
-                TimeUnit.SECONDS.sleep(3);
-		    }
-		    catch (Exception e) {/*check failure*/}
-            
+	    catch (Exception e) {
+		    /*check failure*/
+	    }
 
-            output = output + "\n\nCongratulations!! Candidate " + in + " is clear to adopt their next best friend.\n";
             
-            return output;
+            return apiResults;
         };
     }
 }
