@@ -41,10 +41,9 @@ accelerator:
     inputType: toggle
     dataType: boolean
     dependsOn:
-        name: appDeploymentType
+      - name: appDeploymentType
         value: cnr
     defaultValue: false
-    
     
   - name: sampleAPI
     label: Sample API
@@ -89,6 +88,7 @@ engine:
               with: "#artifactId"
             - text: sample-api
               with: "#sampleAPI"
+   #deployments
     - includes: [ "deployment/app-knative.yaml"]
       condition: "#appDeploymentType == 'cnr'"
       chain:
@@ -105,16 +105,7 @@ engine:
           substitutions:
             - text: app-name
               with: "#artifactId"
-    - includes: [ "deployment/workload.yaml"]
-      condition: "#appDeploymentType == 'tap'"
-      chain:
-        - type: ReplaceText
-          substitutions:
-            - text: app-name
-              with: "#artifactId"
-            - text: git-repo
-              with: "#gitRepo"
-     - includes: [ "deployment/app-simple.yaml"]
+    - includes: [ "deployment/app-simple.yaml"]
       condition: "#appDeploymentType == 'k8s'"
       chain:
         - type: ReplaceText
