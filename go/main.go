@@ -20,9 +20,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		    
 	executeAPI (API_CALL)
 	
-	fmt.Fprintf(w, "<H3>Function revision: ")
-	fmt.Fprintf(w, os.Getenv("REV"))
-	fmt.Fprintf(w, "</H3>")
+	log.Println("Function revision:", os.Getenv("REV"))
+	
 }
 
 func executeAPI (string apiCall) {
