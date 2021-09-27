@@ -9,7 +9,7 @@ accelerator:
   
   #function framework
   - name: functionFramework
-    label: Function implementation framework
+    label: Framework
     description: Function implementation framework
     required: true
     defaultValue: go
@@ -22,7 +22,7 @@ accelerator:
   
   #app deployment
   - name: appDeploymentType
-    label: App deployment config
+    label: Deployment config
     description: Type of deployment configurations
     required: true
     defaultValue: k8s
