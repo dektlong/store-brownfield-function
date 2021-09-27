@@ -1,3 +1,3 @@
-module github.com/dektlong/adopter-check
+module my-git
 
 go 1.16
