@@ -34,9 +34,7 @@ accelerator:
         text: TAP workload
       - value: cnr
         text: Cloud Native Runtime (kNative)
-      - value: cf
-        text: Cloud Foundry manifest
-        
+           
   - name: scaleToZero
     label: Scale to zero
     description: Enable function to scale to zero
