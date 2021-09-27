@@ -105,6 +105,8 @@ engine:
           substitutions:
             - text: app-name
               with: "#artifactId"
+            - text: git-repo
+              with: "#gitRepo"
     - includes: [ "deployment/app-simple.yaml"]
       condition: "#appDeploymentType == 'k8s'"
       chain:
