@@ -41,8 +41,8 @@ accelerator:
     inputType: toggle
     dataType: boolean
     dependsOn:
-      - name: appDeploymentType
-        value: cnr
+      name: appDeploymentType
+      value: cnr
     defaultValue: false
     
   - name: sampleAPI
