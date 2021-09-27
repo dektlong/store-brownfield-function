@@ -42,9 +42,6 @@ accelerator:
     description: Enable function to scale to zero
     inputType: toggle
     dataType: boolean
-    dependsOn:
-      name: appDeploymentType
-      value: cnr
     defaultValue: false
     
   - name: gitRepo
