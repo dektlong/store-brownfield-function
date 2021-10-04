@@ -89,7 +89,7 @@ engine:
             - text: sample-api
               with: "#sampleAPI"
    #deployments
-    - includes: [ "deployment/app-knative.yaml"]
+    - includes: [ "config/deployment/app-knative.yaml"]
       condition: "#appDeploymentType == 'cnr'"
       chain:
         - type: ReplaceText
@@ -98,7 +98,7 @@ engine:
               with: "#artifactId"
             - text: scale-to-zero-value
               with: "#scaleToZero"
-    - includes: [ "deployment/workload.yaml"]
+    - includes: [ "config/deployment/workload.yaml"]
       condition: "#appDeploymentType == 'tap'"
       chain:
         - type: ReplaceText
@@ -107,7 +107,7 @@ engine:
               with: "#artifactId"
             - text: git-repo
               with: "#gitRepo"
-    - includes: [ "deployment/app-simple.yaml"]
+    - includes: [ "config/deployment/app-simple.yaml"]
       condition: "#appDeploymentType == 'k8s'"
       chain:
         - type: ReplaceText
