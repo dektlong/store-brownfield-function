@@ -3,11 +3,14 @@ kind: Workload
 metadata:
   name: app-name
   labels:
+    app.kubernetes.io/name: app-name
     app.tanzu.vmware.com/workload-type: web
-
 spec:
   source:
     git:
       url: git-repo
       ref:
         branch: "dev"
+  env:
+  - name: BROWNFIELD_API
+    value: "https://brownfieldapi.example.com/my-brownfield-api"
