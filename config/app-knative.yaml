@@ -6,7 +6,7 @@ metadata:
   name: #@ data.values.artifactId
 spec:
   template:
-#@ if data.values.scaleToZero
+#@ if data.values.scaleToZero:
     metadata:
       annotations:
         autoscaling.knative.dev/class: "kpa.autoscaling.knative.dev"
