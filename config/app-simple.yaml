@@ -1,31 +1,33 @@
+#@ load("@ytt:data", "data") 
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app-name
+  name: #@ data.values.artifactId
 spec:
   selector:
     matchLabels:
-      app: app-name
+      app: #@ data.values.artifactId
   template:
     metadata:
       labels:
-        app: app-name
+        app: #@ data.values.artifactId
     spec:
       imagePullSecrets: 
       - name: imagereg-secret
       containers:
-        - name: app-name
-          image: app-name:latest
+        - name: #@ data.values.artifactId
+          image: #@ data.values.artifactId + ":latest"
           ports:
             - containerPort: 8080
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: app-name-service
+  name: #@ data.values.artifactId + "-service"
 spec:
   ports:
     - port: 80
       targetPort: 8080
   selector:
-    app: app-name
+    app: #@ data.values.artifactId
