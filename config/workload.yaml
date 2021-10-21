@@ -1,16 +1,18 @@
+#@ load("@ytt:data", "data") 
+---
 apiVersion: carto.run/v1alpha1
 kind: Workload
 metadata:
-  name: app-name
+  name: #@ data.values.artifactId
   labels:
-    app.kubernetes.io/name: app-name
-    app.tanzu.vmware.com/workload-type: web
+    app.kubernetes.io/name: #@ data.values.artifactId
+    app.tanzu.vmware.com/workload-type: online-store
 spec:
   source:
     git:
-      url: git-repo
+      url: #@ data.values.gitRepo
       ref:
         branch: "dev"
   env:
   - name: BROWNFIELD_API
-    value: "https://brownfieldapi.example.com/my-brownfield-api"
+    value: #@ data.values.sampleAPI
