@@ -12,7 +12,7 @@ spec:
 #@ data.values.scaleToZero 
         autoscaling.knative.dev/enable-scale-to-zero: true
 #@ end
-      name: #@ data.values.artifactId
+      name: test
     spec:
       containerConcurrency: 10
       containers:
