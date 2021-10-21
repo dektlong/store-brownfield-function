@@ -22,7 +22,7 @@ accelerator:
   
   #app deployment
   - name: appDeploymentType
-    label: Deployment config
+    label: Deployment environment
     description: Type of deployment configurations
     required: true
     defaultValue: k8s
@@ -31,9 +31,9 @@ accelerator:
       - value: k8s
         text: K8s simple
       - value: tap
-        text: TAP workload
-      - value: cnr
-        text: Cloud Native Runtime (kNative)
+        text: Tanzu Application Platform
+      - value: kNative
+        text: kNative serving
            
   - name: scaleToZero
     label: Scale to zero
@@ -42,7 +42,7 @@ accelerator:
     dataType: boolean
     dependsOn:
       name: appDeploymentType
-      value: cnr
+      value: kNative
     defaultValue: false
   
   - name: gitRepo
@@ -90,27 +90,14 @@ engine:
               with: "#sampleAPI"
    #deployments
     - includes: [ "config/deployment/app-knative.yaml"]
-      condition: "#appDeploymentType == 'cnr'"
+      condition: "#appDeploymentType == 'kNative'"
       chain:
-        - type: ReplaceText
-          substitutions:
-            - text: app-name
-              with: "#artifactId"
-            - text: scale-to-zero-value
-              with: "#scaleToZero"
+        - type: YTT
     - includes: [ "config/deployment/workload.yaml"]
       condition: "#appDeploymentType == 'tap'"
       chain:
-        - type: ReplaceText
-          substitutions:
-            - text: app-name
-              with: "#artifactId"
-            - text: git-repo
-              with: "#gitRepo"
+        - type: YTT
     - includes: [ "config/deployment/app-simple.yaml"]
       condition: "#appDeploymentType == 'k8s'"
       chain:
-        - type: ReplaceText
-          substitutions:
-            - text: app-name
-              with: "#artifactId"
+        - type: YTT
