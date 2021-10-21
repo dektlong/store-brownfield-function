@@ -6,25 +6,15 @@ metadata:
   name: #@ data.values.artifactId
 spec:
   template:
+#@ if data.values.scaleToZero
     metadata:
       annotations:
-        client.knative.dev/user-image: #@ data.values.artifactId + ":latest"
-#@ data.values.scaleToZero 
+        autoscaling.knative.dev/class: "kpa.autoscaling.knative.dev"
         autoscaling.knative.dev/enable-scale-to-zero: true
 #@ end
     spec:
-      containerConcurrency: 10
       containers:
-      - env:
+      - image: #@ "dev-registry.example.com/" + data.values.artifactId + ":latest"
+        env:
         - name: REV
           value: #@ "revision 1 of " + data.values.artifactId + " function"
-        image: #@ data.values.artifactId + ":latest"
-        name: user-container
-        readinessProbe:
-          successThreshold: 1
-          tcpSocket:
-            port: 0
-        resources: {}
-      enableServiceLinks: false
-      timeoutSeconds: 300
-status: {}
