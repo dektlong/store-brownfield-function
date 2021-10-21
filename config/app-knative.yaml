@@ -1,21 +1,25 @@
+#@ load("@ytt:data", "data") 
+---
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  name: app-name
+  name: #@ data.values.artifactId
 spec:
   template:
     metadata:
       annotations:
-        client.knative.dev/user-image: app-name:latest
-        autoscaling.knative.dev/enable-scale-to-zero: scale-to-zero-value
-      name: app-name-v1
+        client.knative.dev/user-image: #@ data.values.artifactId + ":latest"
+#@ data.values.scaleToZero 
+        autoscaling.knative.dev/enable-scale-to-zero: true
+#@ end
+      name: #@ data.values.artifactId + "-v1"
     spec:
       containerConcurrency: 10
       containers:
       - env:
-        - name: TARGET
-          value: revision 1 of app-name function
-        image: registryPrefix/app-name:latest
+        - name: REV
+          value: #@ "revision 1 of " + data.values.artifactId + " function"
+        image: #@ data.values.artifactId + ":latest"
         name: user-container
         readinessProbe:
           successThreshold: 1
