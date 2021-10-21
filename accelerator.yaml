@@ -89,15 +89,15 @@ engine:
             - text: sample-api
               with: "#sampleAPI"
    #deployments
-    - includes: [ "config/deployment/app-knative.yaml"]
+    - includes: [ "config/app-knative.yaml"]
       condition: "#appDeploymentType == 'kNative'"
       chain:
         - type: YTT
-    - includes: [ "config/deployment/workload.yaml"]
+    - includes: [ "config/workload.yaml"]
       condition: "#appDeploymentType == 'tap'"
       chain:
         - type: YTT
-    - includes: [ "config/deployment/app-simple.yaml"]
+    - includes: [ "config/app-simple.yaml"]
       condition: "#appDeploymentType == 'k8s'"
       chain:
         - type: YTT
