@@ -1,8 +1,8 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: frontend-ux-for-online-stores
-  description: Frontend UX for Online Stores
+  name: brownfield-function-for-online-stores
+  description: Brownfield Function for Online Stores
   tags:
     - onlinestore-dev
   annotations:
