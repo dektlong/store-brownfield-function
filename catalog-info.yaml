@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: frontend-ux-for-online-stores
+  description: Frontend UX for Online Stores
+  tags:
+    - onlinestore-dev
+  annotations:
+    'backstage.io/kubernetes-label-selector': 'app.kubernetes.io/part-of=backend-api-for-online-stores'
+spec:
+  type: service
+  lifecycle: experimental
+  owner: default-team
