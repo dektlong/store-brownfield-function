@@ -3,7 +3,7 @@ accelerator:
   description: Accelerator to create a simple Function executing Brownfield APIs
   iconUrl: https://raw.githubusercontent.com/dektlong/dekt-images/80bfdbf23040731d16310e286e7d40b57e3b23d5/tanzu.png
   tags:
-  - onlinestore-dev
+  - cloud-native-devs
 
   options:
   
