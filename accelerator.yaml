@@ -31,7 +31,7 @@ accelerator:
       #- value: k8s
       #  text: K8s simple
       - value: tap
-        text: Tanzu Application Platform Workload
+        text: Tanzu Application Platform workload
       - value: kNative
         text: kNative serving
            
