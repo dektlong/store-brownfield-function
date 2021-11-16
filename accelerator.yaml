@@ -1,5 +1,5 @@
 accelerator:
-  displayName: Brownfield Function for Online Stores
+  displayName: Brownfield Function
   description: Accelerator to create a simple Function executing Brownfield APIs
   iconUrl: https://raw.githubusercontent.com/dektlong/dekt-images/80bfdbf23040731d16310e286e7d40b57e3b23d5/tanzu.png
   tags:
@@ -25,13 +25,13 @@ accelerator:
     label: Deployment environment
     description: Type of deployment configurations
     required: true
-    defaultValue: k8s
+    defaultValue: tap
     inputType: select
     choices:
-      - value: k8s
-        text: K8s simple
+      #- value: k8s
+      #  text: K8s simple
       - value: tap
-        text: Tanzu Application Platform
+        text: Tanzu Application Platform Workload
       - value: kNative
         text: kNative serving
            
