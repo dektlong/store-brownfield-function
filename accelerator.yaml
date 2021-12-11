@@ -69,8 +69,6 @@ engine:
           substitutions:
             - text: app-name
               with: "#artifactId"
-            - text: sample-api
-              with: "#sampleAPI"
     #java-native framework
     - includes: [ "java-native/**" ]
       condition: "#functionFramework == 'spring'"
@@ -79,8 +77,6 @@ engine:
           substitutions:
             - text: app-name
               with: "#artifactId"
-            - text: sample-api
-              with: "#sampleAPI"
    #deployments
     - includes: [ "config/app-knative.yaml"]
       condition: "#appDeploymentType == 'kNative'"
