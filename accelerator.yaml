@@ -1,6 +1,6 @@
 accelerator:
-  displayName: Brownfield Function
-  description: Accelerator to create a simple Function executing Brownfield APIs
+  displayName: Web Function
+  description: Accelerator to create a simple web Function 
   iconUrl: https://raw.githubusercontent.com/dektlong/dekt-images/80bfdbf23040731d16310e286e7d40b57e3b23d5/tanzu.png
   tags:
   - cloud-native-devs
@@ -50,15 +50,8 @@ accelerator:
     inputType: text
     required: true
     dataType: string
-    defaultValue: https://github.com/dektlong/adopter-check
-  
-  - name: sampleAPI
-    label: Sample API
-    inputType: text
-    display: true
-    dataType: string
-    defaultValue: https://brownfieldapi.example.com/my-sample-api
-  
+    defaultValue: https://github.com/dektlong/devx-mood
+   
 engine:
   merge:
     #generic transformations
