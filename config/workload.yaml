@@ -9,6 +9,6 @@ metadata:
 spec:
   source:
     git:
-      url: #@ data.values.gitRepo
+      url: #@ "https://github.com/dektlong/" + data.values.gitRepo
       ref:
         branch: main
