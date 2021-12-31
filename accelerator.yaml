@@ -7,9 +7,8 @@ accelerator:
 
   options:
   
-   - name: gitRepo
+  - name: gitRepo
     label: Source repository
-    inputType: text
     required: true
     dataType: string
     defaultValue: my-function
