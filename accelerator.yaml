@@ -7,6 +7,13 @@ accelerator:
 
   options:
   
+   - name: gitRepo
+    label: Source repository
+    inputType: text
+    required: true
+    dataType: string
+    defaultValue: my-function
+    
   #function framework
   - name: functionFramework
     label: Framework
@@ -40,17 +47,7 @@ accelerator:
     description: Enable function to scale to zero
     inputType: toggle
     dataType: boolean
-    dependsOn:
-      name: appDeploymentType
-      value: kNative
     defaultValue: false
-  
-  - name: gitRepo
-    label: Source repository
-    inputType: text
-    required: true
-    dataType: string
-    defaultValue: my-function
    
 engine:
   merge:
