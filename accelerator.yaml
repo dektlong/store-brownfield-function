@@ -41,12 +41,12 @@ accelerator:
    #   - value: kNative
    #     text: kNative serving
            
-  - name: scaleToZero
-    label: Scale to zero
-    description: Enable function to scale to zero
-    inputType: toggle
-    dataType: boolean
-    defaultValue: false
+  #- name: scaleToZero
+  #  label: Scale to zero
+  #  description: Enable function to scale to zero
+  #  inputType: toggle
+  #  dataType: boolean
+  #  defaultValue: false
    
 engine:
   merge:
