@@ -21,19 +21,19 @@ accelerator:
         text: Spring Native
   
   #app deployment
-  - name: appDeploymentType
-    label: Deployment environment
-    description: Type of deployment configurations
-    required: true
-    defaultValue: tap
-    inputType: select
-    choices:
+  #- name: appDeploymentType
+  #  label: Deployment environment
+  #  description: Type of deployment configurations
+  #  required: true
+  #  defaultValue: tap
+  #  inputType: select
+  #  choices:
       #- value: k8s
       #  text: K8s simple
-      - value: tap
-        text: Tanzu Application Platform workload
-      - value: kNative
-        text: kNative serving
+   #   - value: tap
+   #     text: Tanzu Application Platform workload
+   #   - value: kNative
+   #     text: kNative serving
            
   - name: scaleToZero
     label: Scale to zero
@@ -78,15 +78,15 @@ engine:
             - text: app-name
               with: "#artifactId"
    #deployments
-    - includes: [ "config/app-knative.yaml"]
-      condition: "#appDeploymentType == 'kNative'"
-      chain:
-        - type: YTT
+    #- includes: [ "config/app-knative.yaml"]
+    #  condition: "#appDeploymentType == 'kNative'"
+    #  chain:
+    #    - type: YTT
     - includes: [ "config/workload.yaml"]
-      condition: "#appDeploymentType == 'tap'"
+     # condition: "#appDeploymentType == 'tap'"
       chain:
         - type: YTT
-    - includes: [ "config/app-simple.yaml"]
-      condition: "#appDeploymentType == 'k8s'"
-      chain:
-        - type: YTT
+    #- includes: [ "config/app-simple.yaml"]
+    #  condition: "#appDeploymentType == 'k8s'"
+    #  chain:
+    #    - type: YTT
