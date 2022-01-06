@@ -80,16 +80,19 @@ engine:
           substitutions:
             - text: app-name
               with: "#artifactId"
-   #deployments
-    #- includes: [ "config/app-knative.yaml"]
-    #  condition: "#appDeploymentType == 'kNative'"
-    #  chain:
-    #    - type: YTT
-    - includes: [ "config/workload.yaml"]
-     # condition: "#appDeploymentType == 'tap'"
+  #deployment configs per type
+    - includes: [ "config/tap/**"]
+    #  condition: "#appDeploymentType == 'tap'"
       chain:
         - type: YTT
-    #- includes: [ "config/app-simple.yaml"]
+    - includes: [ "config/cf/**"]
+    #  condition: "#appDeploymentType == 'cf'"
+      chain:
+        - type: YTT
+    - includes: [ "config/k8s/**"]
     #  condition: "#appDeploymentType == 'k8s'"
-    #  chain:
-    #    - type: YTT
+      chain:
+        - type: YTT
+    - includes: [ "config/backstage/**"]
+      chain:
+        - type: YTT
