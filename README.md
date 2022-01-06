@@ -1,3 +1,5 @@
 # Introduction
-An Accelerator to create a simple Function executing Brownfield APIs for 3rd party services used by online store.
+An Accelerator to create a simple Function exposed as a Web GUI.
+
+This accelerator supports either GoLang or Spring Native implementations
 
