@@ -7,11 +7,11 @@ accelerator:
 
   options:
   
-  - name: gitRepo
-    label: Source repository
-    required: true
-    dataType: string
-    defaultValue: my-function
+ # - name: gitRepo
+ #   label: Source repository
+ #   required: true
+ #   dataType: string
+ #   defaultValue: my-function
     
   - name: parentApp
     label: Name of parent application (the Big A app)
