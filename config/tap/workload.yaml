@@ -10,6 +10,6 @@ metadata:
 spec:
   source:
     git:
-      url: #@ "https://github.com/dektlong/" + data.values.gitRepo
+      url: #@ "https://github.com/dektlong/" + data.values.artifactId
       ref:
         branch: main
