@@ -92,6 +92,3 @@ engine:
       condition: "#appDeploymentType == 'k8s'"
       chain:
         - type: YTT
-    - includes: [ "config/backstage/**"]
-      chain:
-        - type: YTT
