@@ -9,5 +9,6 @@ metadata:
     'backstage.io/kubernetes-label-selector': #@ "app.kubernetes.io/part-of:" + data.values.parentApp
 spec:
   type: service
-  lifecycle: experimental
-  owner: default-team
+  lifecycle: development
+  owner: my-team
+  system: #@ data.values.parentApp
